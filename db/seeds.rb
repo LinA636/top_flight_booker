@@ -12,6 +12,7 @@
 Flight.delete_all
 Airport.delete_all
 
+
 # Create Airports
 airport_codes = ['NYC', 'MUC', 'HH', 'CHCH', 'AUK']
 
@@ -21,24 +22,41 @@ end
 
 
 # Create Flights data
-
-flights_data = []
+flights = []
 # NYC - MUC
+flights_data = []
 5.times do |i|
     flights_data << {
         start_datetime: DateTime.now + i.days,
         flight_duration: 8
     }
 end
-
+flights += flights_data.each do |flight_data|
+    Flight.create(
+      start_datetime: flight_data[:start_datetime],
+      flight_duration: flight_data[:flight_duration],
+      departure_airport:  Airport.find_by(airport_code: 'NYC'),
+      arrival_airport: Airport.find_by(airport_code: 'MUC')
+    )
+end
 # NYC - AUK
+flights_data = []
 5.times do |i|
     flights_data << {
         start_datetime: DateTime.now + i.days,
         flight_duration: 18
     }
 end
+flights += flights_data.each do |flight_data|
+    Flight.create(
+      start_datetime: flight_data[:start_datetime],
+      flight_duration: flight_data[:flight_duration],
+      departure_airport:  Airport.find_by(airport_code: 'NYC'),
+      arrival_airport: Airport.find_by(airport_code: 'AUK')
+    )
+end
 
+flights_data = []
 # HH - MUC
 5.times do |i|
     flights_data << {
@@ -46,7 +64,16 @@ end
         flight_duration: 1
     }
 end
+flights += flights_data.each do |flight_data|
+    Flight.create(
+      start_datetime: flight_data[:start_datetime],
+      flight_duration: flight_data[:flight_duration],
+      departure_airport:  Airport.find_by(airport_code: 'HH'),
+      arrival_airport: Airport.find_by(airport_code: 'MUC')
+    )
+end
 
+flights_data = []
 # HH - CHCH
 5.times do |i|
     flights_data << {
@@ -54,13 +81,13 @@ end
         flight_duration: 32
     }
 end
-
-# create flights
-flights_data.each_with_index do |flight_data, index|
+flights += flights_data.each do |flight_data|
     Flight.create(
       start_datetime: flight_data[:start_datetime],
       flight_duration: flight_data[:flight_duration],
-      departure_airport: airports[index % airports.length],
-      arrival_airport: airports[(index + 1) % airports.length]
+      departure_airport:  Airport.find_by(airport_code: 'HH'),
+      arrival_airport: Airport.find_by(airport_code: 'CHCH')
     )
 end
+
+
