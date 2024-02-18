@@ -1,1 +1,35 @@
 <h1>Search for a flight</h1>
+
+<%= form_with(url: request.fullpath, method: :get) do |form| %>
+  <!-- dropdown list for departure airports -->
+  <div class="field">
+    <%= form.label :departure_airport_id %>
+    <%= form.collection_select :departure_airport_id, Airport.all, :id, :airport_code, { prompt: 'Select Departure Airport' } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :arrival_airport_id %>
+    <%= form.collection_select :arrival_airport_id, Airport.all, :id, :airport_code, { prompt: 'Select Arrival Airport' } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :num_passangers %>
+    <%= form.collection_select :num_passangers, (1..4), :to_i, :to_s, { prompt: 'Select Number of Passengers' } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_datetime, 'Select a day:' %>
+    <%= form.select :start_datetime, 
+      options_for_select(@available_dates.map{ |date| [date.strftime('%B %d, %Y'), date] }, @start_datetime) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Search", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<h2>Search Results</h2>
+
+<p>
+  
+</p>

@@ -27,7 +27,7 @@ flights = []
 flights_data = []
 5.times do |i|
     flights_data << {
-        start_datetime: DateTime.now + i.days,
+        start_datetime: Date.today + i.days,
         flight_duration: 8
     }
 end
@@ -43,7 +43,7 @@ end
 flights_data = []
 5.times do |i|
     flights_data << {
-        start_datetime: DateTime.now + i.days,
+        start_datetime: Date.today + i.days,
         flight_duration: 18
     }
 end
@@ -60,7 +60,7 @@ flights_data = []
 # HH - MUC
 5.times do |i|
     flights_data << {
-        start_datetime: DateTime.now + i.days,
+        start_datetime: Date.today + i.days,
         flight_duration: 1
     }
 end
@@ -77,7 +77,7 @@ flights_data = []
 # HH - CHCH
 5.times do |i|
     flights_data << {
-        start_datetime: DateTime.now + i.days,
+        start_datetime: Date.today + i.days,
         flight_duration: 32
     }
 end
