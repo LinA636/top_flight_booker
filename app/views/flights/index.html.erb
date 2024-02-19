@@ -29,3 +29,25 @@
 <% end %>
 
 <h2>Search Results</h2>
+
+<table class="available_flights_table">
+  <thead>
+    <tr>
+      <th>Departure Airport</th>
+      <th>Arrival Airport</th>
+      <th>Start Day</th>
+      <th>Flight Duration</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @flights.each do |flight| %>
+      <tr>
+        <td><%= flight.departure_airport.airport_code%></td>
+        <td><%= flight.arrival_airport.airport_code %></td>
+        <td><%= flight.start_datetime %></td>
+        <td><%= flight.flight_duration %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
