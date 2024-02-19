@@ -23,14 +23,14 @@
       options_for_select(@available_dates.map{ |date| [date.strftime('%B %d, %Y'), date] }, @start_datetime) %>
   </div>
 
-  <v class="actions">
+  <div class="actions">
     <%= form.submit "Search", class: "btn btn-primary" %>
   </div>
 <% end %>
 
 <h2>Available Flights</h2>
 
-<%= form_with() do |form|%>
+<%= form_with(url: bookings_path, method: :get) do |form|%>
   
   
   <table class="available_flights_table">
