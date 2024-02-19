@@ -5,6 +5,7 @@ class FlightsController < ApplicationController
 
         # logic for retrieving flights based on the selected date
         @flights = query_flights
+        @num_passengers = params[:num_passengers]
     end
 
 
