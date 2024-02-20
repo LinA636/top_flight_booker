@@ -30,9 +30,7 @@
 
 <h2>Available Flights</h2>
 
-<%= form_with(url: bookings_path, method: :get) do |form|%>
-  
-  
+<%= form_with(url: new_booking_path, method: :get) do |form|%>
   <table class="available_flights_table">
     <thead>
       <tr>
@@ -61,5 +59,8 @@
   </table>
 
   <%= form.hidden_field :num_passengers, value: @num_passengers %>
-
+  
+  <div class="actions">
+    <%= form.submit "Continue to Booking", class: "btn btn-primary" %>
+  </div>
 <% end %>
