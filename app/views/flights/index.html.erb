@@ -61,5 +61,8 @@
   </table>
 
   <%= form.hidden_field :num_passengers, value: @num_passengers %>
-
+ 
+ <div class="actions">
+    <%= form.submit "continue", class: "btn btn-primary" %>
+  </div>
 <% end %>

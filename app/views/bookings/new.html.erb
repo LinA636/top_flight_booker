@@ -1,0 +1,40 @@
+<h1>Personal Informations</h1>
+<div class="flight_summary">
+    <table class="available_flights_table">
+    <thead>
+      <tr>
+        <th>Departure Airport</th>
+        <th>Arrival Airport</th>
+        <th>Start Day</th>
+        <th>Flight Duration</th>
+        <th>Flight ID</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @flights.each do |flight| %>
+        <tr>
+          <td><%= flight.departure_airport.airport_code%></td>
+          <td><%= flight.arrival_airport.airport_code %></td>
+          <td><%= flight.start_datetime %></td>
+          <td><%= flight.flight_duration %></td>
+          <td><%= flight.flight_id %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= form_with(url: request.fullpath, method: :get) do |form| %>
+    <% @num_passangers.times do%>
+        <div class="field">
+            <%= form.label :name %>
+            <%= form.text_field :name %>
+        </div>
+
+        <div class="field">
+            <%= form.label :email%>
+            <%= form.email_field, autocomplete: "email" %>
+        </div>
+    <%end%>
+<% end %>
