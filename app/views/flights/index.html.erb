@@ -13,19 +13,21 @@
   </div>
 
   <div class="field">
-    <%= form.label :num_passangers %>
-    <%= form.collection_select :num_passangers, (1..4), :to_i, :to_s, { prompt: 'Select Number of Passengers' } %>
+    <%= form.label :num_passengers %>
+    <%= form.collection_select :num_passengers, (1..4), :to_i, :to_s, {selected: 1}%>
   </div>
 
   <div class="field">
     <%= form.label :start_datetime, 'Select a day:' %>
     <%= form.select :start_datetime, 
-      options_for_select(@available_dates.map{ |date| [date.strftime('%B %d, %Y'), date] }, @start_datetime) %>
+      options_for_select(@available_dates.map{ |date| [date.strftime('%B %d, %Y'), date] }, @start_datetime),
+       { include_blank: 'Select a Day' } %>
   </div>
 
   <div class="actions">
     <%= form.submit "Search", class: "btn btn-primary" %>
   </div>
+
 <% end %>
 
 <h2>Available Flights</h2>
@@ -38,6 +40,7 @@
         <th>Arrival Airport</th>
         <th>Start Day</th>
         <th>Flight Duration</th>
+        <th>Flight ID</th>
       </tr>
     </thead>
 
@@ -50,7 +53,8 @@
           <td><%= flight.flight_duration %></td>
           <td>
             <div class="field">
-              <%= form.radio_button :selected_flight, flight%>
+              <%= form.radio_button :selected_flight, flight.id%>
+              <%= form.label :flight_id, flight.id%>
             </div>
           </td>
         </tr>
@@ -58,9 +62,9 @@
     </tbody>
   </table>
 
-  <%= form.hidden_field :num_passengers, value: @num_passengers %>
+  <%= form.hidden_field :num_passengers, value: @num_passengers || 1 %>
   
   <div class="actions">
-    <%= form.submit "Continue to Booking", class: "btn btn-primary" %>
+    <%= form.submit "Continue to Booking"%>
   </div>
 <% end %>

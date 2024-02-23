@@ -2,7 +2,7 @@ class FlightsController < ApplicationController
     def index 
         # logic for the form to use
         @available_dates = Flight.pluck(:start_datetime).map(&:to_date).uniq
-
+        
         # logic for retrieving flights based on the selected date
         @flights = query_flights
         @num_passengers = params[:num_passengers]

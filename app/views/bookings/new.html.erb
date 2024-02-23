@@ -12,15 +12,13 @@
     </thead>
 
     <tbody>
-      <% @flights.each do |flight| %>
         <tr>
-          <td><%= flight.departure_airport.airport_code%></td>
-          <td><%= flight.arrival_airport.airport_code %></td>
-          <td><%= flight.start_datetime %></td>
-          <td><%= flight.flight_duration %></td>
-          <td><%= flight.flight_id %></td>
+          <td><%= @departure_airport.airport_code%></td>
+          <td><%= @arrival_airport.airport_code %></td>
+          <td><%= @flight.start_datetime %></td>
+          <td><%= @flight.flight_duration %></td>
+          <td><%= @flight.id %></td>
         </tr>
-      <% end %>
     </tbody>
   </table>
 </div>
@@ -28,13 +26,13 @@
 <%= form_with(url: request.fullpath, method: :get) do |form| %>
     <% @num_passangers.times do%>
         <div class="field">
-            <%= form.label :name %>
-            <%= form.text_field :name %>
+          <%= form.label :name %>
+          <%= form.text_field :name %>
         </div>
 
         <div class="field">
-            <%= form.label :email%>
-            <%= form.email_field, autocomplete: "email" %>
+          <%= form.label :email %>
+          <%= form.email_field :email, autocomplete: "email" %> 
         </div>
     <%end%>
 <% end %>
