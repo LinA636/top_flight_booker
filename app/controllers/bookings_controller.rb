@@ -11,6 +11,13 @@ class BookingsController < ApplicationController
 
     def create 
       logger.debug "Params: #{params.inspect}"
+      @booking = Booking.new
+
+      if @booking.save
+        redirect_to bookings_path, notice: 'Booking successfully saved'
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
 
     private
