@@ -3,7 +3,7 @@ class Flight < ApplicationRecord
     belongs_to :departure_airport, class_name: 'Airport', foreign_key: 'departure_airport_id'
     belongs_to :arrival_airport, class_name: 'Airport', foreign_key: 'arrival_airport_id'
     # many-to-many association through bookings
-    has_many :bookings
+    has_many :bookings, :dependent => :destroy
     has_many :passengers, through: :bookings
 
     # Validations

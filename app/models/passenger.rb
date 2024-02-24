@@ -1,6 +1,6 @@
 class Passenger < ApplicationRecord
     # many-to-many association throuth bookings
-    has_many :bookings
+    belongs_to :bookings
     has_many :flights, through: :bookings
     
     # Validations
