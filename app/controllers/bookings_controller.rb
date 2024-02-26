@@ -1,33 +1,41 @@
 class BookingsController < ApplicationController
     def new
-      puts "Selected Flight ID: #{params[:selected_flight]}"
       @booking = Booking.new
 
       @flight = Flight.find(params[:selected_flight])
-      @departure_airport = getAirportWithId(@flight.departure_airport_id)
-      @arrival_airport = getAirportWithId(@flight.arrival_airport_id)
-      @num_passangers = params[:num_passengers].to_i
+      @departure_airport_code = getAirportCodeWithId(@flight.departure_airport_id)
+      @arrival_airport_code = getAirportCodeWithId(@flight.arrival_airport_id)
+      
+      
+      # create Passenger objects
+      params[:num_passengers].to_i.times { @booking.passengers.build }
     end
 
     def create 
-      logger.debug "Params: #{params.inspect}"
-      @booking = Booking.new
-
+      @booking = Booking.new(booking_params)
+      puts "create Parameters: #{params.inspect}"
       if @booking.save
-        redirect_to bookings_path, notice: 'Booking successfully saved'
+
+        puts "saved successfully"
+        redirect_to booking_path(@booking), notice: 'Booking successfully saved'
       else
+        puts 'failed'
         render :new, status: :unprocessable_entity
       end
+    end
+
+    def show
+      
     end
 
     private
 
     def booking_params
-      params.require(:booking).permit(:num_passengers, :selected_flight, :name, :email)
+      params.require(:booking).permit(:flight_id, :selected_flight, passengers_attributes: [:name, :email])
     end
 
-    def getAirportWithId(airport_id)
-      Airport.find_by(id: airport_id)
+    def getAirportCodeWithId(airport_id)
+      Airport.find_by(id: airport_id).airport_code
     end
 
 end
