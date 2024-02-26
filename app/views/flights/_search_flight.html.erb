@@ -1,0 +1,35 @@
+  <!-- dropdown list for departure airports -->
+  <div class="field">
+    <%= f.label :departure_airport_id %>
+    <%= f.select :departure_airport_id, 
+      options_for_select(Airport.all.map{|airport| [airport.airport_code, airport.id]}, selected: params[:departure_airport_id]),
+      { include_blank: 'Select Departure Airport' } %>
+  </div>
+
+  <!-- dropdown list for arrival airports -->
+  <div class="field">
+    <%= f.label :arrival_airport_id %>
+    <%= f.select :arrival_airport_id, 
+      options_for_select(Airport.all.map{|airport| [airport.airport_code, airport.id]}, selected: params[:arrival_airport_id]),
+      { include_blank: 'Select Arrival Airport' } %>
+  </div>
+
+  <!-- dropdown list for number of passengers -->
+  <div class="field">
+    <%= f.label :num_passengers %>
+    <%= f.collection_select :num_passengers, (1..4), :to_i, :to_s, 
+      {selected: @num_passengers || 1}%>
+  </div>
+
+  <!-- dropdown list to choose a date -->
+  <div class="field">
+    <%= f.label :start_datetime, 'Select a day:' %>
+    <%= f.select :start_datetime, 
+      options_for_select(available_dates.map{ |date| [date.strftime('%B %d, %Y'), date] }, selected: params[:start_datetime]),
+      { include_blank: 'Select a Day' } %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Search", class: "btn btn-primary" %>
+  </div>
+
